@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/styles.css";
 import Unit from "./../src/unit.js";
 import Hero from "./../src/hero.js";
-import Combat from './../src/combat.js'
+import Combat from "./../src/combat.js";
 
 function displayStats(hero, enemy) {
   //make html
@@ -39,13 +39,13 @@ function displayFighting() {
 }
 
 function displayResults(name, playerDmg, enemyDmg) {
-  const resultsHtml = `<li>${name} took ${playerDmg} points of damage!</li><li>You took ${enemyDmg} points of damage!</li>`
+  const resultsHtml = `<li>${name} took ${playerDmg} points of damage!</li><li>You took ${enemyDmg} points of damage!</li>`;
   $("#combat-feed").empty();
   $("#combat-feed").append(resultsHtml);
 }
-// function displayOptions(hero) {
-//   const optionsHtml = ``
-// }
+function displayOptions(hero) {
+  const optionsHtml = ``;
+}
 
 $(document).ready(function () {
   //globals
@@ -53,31 +53,42 @@ $(document).ready(function () {
 
   //start combat
   let myEnemy = new Unit("Aardvark", 5, 2, 1);
-  let combat1 = new Combat(myHero, myEnemy)
+  let combat1 = new Combat(myHero, myEnemy);
   // displayEnemy() - only 1 enemy now
   displayStats(myHero, myEnemy);
   displayIntent(myEnemy);
   // displayOptions() - no options yet
 
+  $("input:checkbox").on("change", function () {
+    if ($(this).siblings(":checked").length > 1) {
+      this.checked = false;
+    }
+  });
+
   $("#fight-btn").click(() => {
     displayFighting();
-    setTimeout( () => {
+    setTimeout(() => {
       // calcPlayerDamage = hero attack() - unit armor  DAMAGE TO THE ENEMY
       // calcEnemyDamge = unit attack() - player armor DAMAGE TO THE PLAYER
-      const playerDmg =  combat1.calcPlayerDamage();
+      const playerDmg = combat1.calcPlayerDamage();
       const enemyDmg = combat1.calcEnemyDamage();
       // unit.reduceHp(calcPlayerDamage)
       // hero.reducehp(calcEnemyDamage());
       myHero.reduceHp(enemyDmg);
       myEnemy.reduceHp(playerDmg);
+      // if (myEnemy.hp <= 0) {
+      //   //hide the combat screen
+      //   //display rewards screen
+      //   //levelUp function
+      //   //item/gold reward updates
+      // } else
       displayStats(myHero, myEnemy);
       // displayOptions()
       displayResults(myEnemy.name, playerDmg, enemyDmg);
       displayIntent(myEnemy);
-    },1000);
-    // setTimeout - 1 second (...fighting)
+    }, 1000);
 
-    
+    //next: displayOptions death
   });
 
   $("#form1").submit(function (event) {
