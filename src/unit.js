@@ -9,7 +9,7 @@ export default class Unit {
   }
 
   reduceHp(dmgReceived) {
-    this.hp -= dmgReceived
+    this.hp -= dmgReceived;
   }
 
   attack() {

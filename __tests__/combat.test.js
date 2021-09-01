@@ -36,7 +36,7 @@ describe('Combat', () => {
 
   beforeEach(() => {
     newHero = new Hero("Hero", 5,2,1);
-    newEnemy = new Unit (3,2,1);
+    newEnemy = new Unit ("Goblin", 3,2,1);
     newCombat = new Combat(newHero, newEnemy);
   });
 
@@ -44,4 +44,12 @@ describe('Combat', () => {
     expect(newCombat.hero).toEqual(newHero);
     expect(newCombat.enemy).toEqual(newEnemy);
   });
+
+  test('should calculate player damage to enemy', () =>{
+    expect(newCombat.calcEnemyDamage()).toEqual(1);
+  })
+
+  test('should calculate enemy damage to player', () => {
+    expect(newCombat.calcPlayerDamage()).toEqual(1);
+  })
 })
