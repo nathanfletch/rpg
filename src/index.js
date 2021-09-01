@@ -27,19 +27,19 @@ function displayStats(hero, enemy) {
 }
 
 function displayIntent(enemy) {
-  // const intentHtml = ``
+  const intentHtml = `<li>${enemy.name} will attack for ${enemy.ap}</li>`;
+  $("#combat-feed").append(intentHtml);
 }
 
 $(document).ready(function() {
   //globals
-  let myHero = new Hero("ASCCI WARRIOR", 10, 3, 1);
+  let myHero = new Hero("ASCCI BOI", 10, 3, 1);
 
   //start combat
-  //call constructor
-  let myEnemy = new Unit("Slime", 5, 2, 1);
-  // displayEnemy()
+  let myEnemy = new Unit("Aardvark", 5, 2, 1);
+  // displayEnemy() - hardcoded
   displayStats(myHero, myEnemy);
-  // displayIntent()
+  displayIntent(myEnemy);
   // displayOptions()
   
   //every turn
