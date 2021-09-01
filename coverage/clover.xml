@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1630529957124" clover="3.2.0">
-  <project timestamp="1630529957125" name="All files">
-    <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="9" elements="28" coveredelements="28" complexity="0" loc="19" ncloc="19" packages="1" files="3" classes="3"/>
+<coverage generated="1630533035427" clover="3.2.0">
+  <project timestamp="1630533035428" name="All files">
+    <metrics statements="21" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="10" elements="31" coveredelements="31" complexity="0" loc="21" ncloc="21" packages="1" files="4" classes="4"/>
     <file name="combat.js" path="C:\Users\natha\Desktop\epicodus\rpg\src\combat.js">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
       <line num="3" count="3" type="stmt"/>
       <line num="4" count="3" type="stmt"/>
       <line num="8" count="1" type="stmt"/>
       <line num="12" count="1" type="stmt"/>
+    </file>
+    <file name="game.js" path="C:\Users\natha\Desktop\epicodus\rpg\src\game.js">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
     </file>
     <file name="hero.js" path="C:\Users\natha\Desktop\epicodus\rpg\src\hero.js">
       <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
@@ -26,9 +31,9 @@
       <line num="6" count="13" type="stmt"/>
       <line num="7" count="13" type="stmt"/>
       <line num="8" count="13" type="stmt"/>
-      <line num="12" count="1" type="stmt"/>
-      <line num="16" count="1" type="stmt"/>
-      <line num="20" count="1" type="stmt"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="21" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>

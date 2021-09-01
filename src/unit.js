@@ -6,6 +6,7 @@ export default class Unit {
     this.hp = hp;
     this.ap = ap;
     this.dp = dp;
+    //this.art = art (add displayArt function?)
   }
 
   reduceHp(dmgReceived) {

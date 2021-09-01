@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for combat.js</title>
+    <title>Code coverage report for game.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -18,13 +18,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> combat.js</h1>
+        <h1><a href="index.html">All files</a> game.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -38,14 +38,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -68,34 +68,31 @@
 <a name='L10'></a><a href='#L10'>10</a>
 <a name='L11'></a><a href='#L11'>11</a>
 <a name='L12'></a><a href='#L12'>12</a>
-<a name='L13'></a><a href='#L13'>13</a>
-<a name='L14'></a><a href='#L14'>14</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<a name='L13'></a><a href='#L13'>13</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export default class Combat {
-  constructor(hero, enemy) {
-    this.hero = hero;
-    this.enemy = enemy;
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// import Unit from "./unit.js";
+&nbsp;
+export default class Game {
+  constructor() {
+    this.monsters = ["Aardvark", "Dino", "Monkey"];
+    this.items = {};
   }
 &nbsp;
-  calcEnemyDamage() {
-    return this.enemy.ap - this.hero.dp;
-  }
+  // populateMonsters () {
 &nbsp;
-  calcPlayerDamage() {
-    return this.hero.ap - this.enemy.dp;
-  }
-}</pre></td></tr></table></pre>
+  // }
+}
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

@@ -21,7 +21,7 @@ Combat (Player)
     calcEnemyDamge = unit attack() - player armor
     
     hero.reducehp(calcEnemyDamage());
-    (function? - calc results are params)displayResult = the player took "Enemy calc"
+    displayResult = the player took "Enemy calc"
     displayEnemyIntent
 */
 import Unit from './../src/unit.js'
