@@ -1,11 +1,12 @@
 
 export default class Unit {
 
-  constructor(hp, ap, dp) {
+  constructor(name, hp, ap, dp) {
+    this.name = name;
     this.hp = hp;
     this.ap = ap;
     this.dp = dp;
-  };
+  }
 
   reduceHp(dmgReceived) {
     this.hp -= dmgReceived

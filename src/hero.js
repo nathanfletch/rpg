@@ -1,8 +1,8 @@
 import Unit from './unit.js';
 
 export default class Hero extends Unit {
-  constructor(hp, ap, dp) {
-    super(hp, ap, dp);
+  constructor(name, hp, ap, dp) {
+    super(name, hp, ap, dp);
     this.level = 1;
     this.gold = 10;
     this.inv = {};

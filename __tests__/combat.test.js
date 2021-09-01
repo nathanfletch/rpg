@@ -35,7 +35,7 @@ describe('Combat', () => {
   let newCombat;
 
   beforeEach(() => {
-    newHero = new Hero(5,2,1);
+    newHero = new Hero("Hero", 5,2,1);
     newEnemy = new Unit (3,2,1);
     newCombat = new Combat(newHero, newEnemy);
   });

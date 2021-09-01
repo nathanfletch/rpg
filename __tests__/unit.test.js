@@ -82,9 +82,10 @@ import Unit from './../src/unit.js'
 describe('Unit', () => {
   let newUnit;
   beforeEach(() => {
-    newUnit = new Unit (5,2,1);
+    newUnit = new Unit ("bob",5,2,1);
   })
   test('should correctly build combat unit with appropriate properties', () =>{
+    expect(newUnit.name).toEqual("bob");
     expect(newUnit.hp).toEqual(5);
     expect(newUnit.ap).toEqual(2);
     expect(newUnit.dp).toEqual(1);

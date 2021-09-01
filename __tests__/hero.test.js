@@ -14,7 +14,7 @@ import Hero from "./../src/hero.js";
 describe("Hero", () => {
   let newHero;
   beforeEach(() => {
-    newHero = new Hero(5, 2, 1);
+    newHero = new Hero("hero", 5, 2, 1);
   });
 
   test("should correctly create a hero object by calling the parent constructor", () => {
