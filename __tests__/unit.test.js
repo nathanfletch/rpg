@@ -93,4 +93,9 @@ describe('Unit', () => {
     newUnit.reduceHp(1);
     expect(newUnit.hp).toEqual(4);
   })
+
+  test('should return calculated attack value', () =>{
+    let newUnit = new Unit (5,2,1);
+    expect(newUnit.attack()).toEqual(2);
+  })
 })
