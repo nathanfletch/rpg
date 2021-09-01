@@ -40,6 +40,7 @@ Combat unit
     inv = {}
   methods
     Attack return this.str
+    modifyHealth
     calcDmgReceived enemydmg - armor
     
 hero
@@ -85,5 +86,11 @@ describe('Unit', () => {
     expect(newUnit.hp).toEqual(5);
     expect(newUnit.ap).toEqual(2);
     expect(newUnit.dp).toEqual(1);
+  })
+
+  test('should corecttly modify health positively or negatively', () => {
+    let newUnit = new Unit (5,2,1);
+    newUnit.reduceHp(1);
+    expect(newUnit.hp).toEqual(4);
   })
 })
