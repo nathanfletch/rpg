@@ -80,22 +80,26 @@ defend
 import Unit from './../src/unit.js'
 
 describe('Unit', () => {
-
+  let newUnit;
+  beforeEach(() => {
+    newUnit = new Unit (5,2,1);
+  })
   test('should correctly build combat unit with appropriate properties', () =>{
-    let newUnit = new Unit(5, 2, 1);
     expect(newUnit.hp).toEqual(5);
     expect(newUnit.ap).toEqual(2);
     expect(newUnit.dp).toEqual(1);
   })
 
   test('should corecttly modify health positively or negatively', () => {
-    let newUnit = new Unit (5,2,1);
     newUnit.reduceHp(1);
     expect(newUnit.hp).toEqual(4);
   })
 
   test('should return calculated attack value', () =>{
-    let newUnit = new Unit (5,2,1);
     expect(newUnit.attack()).toEqual(2);
+  })
+
+  test('should return calculated defend value', () =>{
+    expect(newUnit.defend()).toEqual(1);
   })
 })
