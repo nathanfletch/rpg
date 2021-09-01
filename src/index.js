@@ -65,7 +65,16 @@ $(document).ready(function () {
     }
   });
 
-  $("#fight-btn").click(() => {
+  $("#options-form").submit((e) => {
+    e.preventDefault();
+    //get our checked options
+    //branch to call the options
+    let fightArray = [];
+    $("input:checkbox:checked").each(function () {
+      if (this.checked) fightArray.push($(this).val());
+    });
+    console.log(fightArray);
+
     displayFighting();
     setTimeout(() => {
       // calcPlayerDamage = hero attack() - unit armor  DAMAGE TO THE ENEMY
