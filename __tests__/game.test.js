@@ -6,4 +6,6 @@ describe("Game", () => {
     expect(myGame.monsters).toEqual(["Aardvark", "Dino", "Monkey"]);
     expect(myGame.items).toEqual({});
   });
+
+  // test('should call the Unit constructor')
 });
