@@ -1,4 +1,4 @@
-import Unit from './unit.js';
+import Unit from "./unit.js";
 
 export default class Hero extends Unit {
   constructor(name, hp, ap, dp) {
@@ -24,7 +24,15 @@ export default class Hero extends Unit {
   }
   //
   getGold() {
-    this.gold +=10;
+    this.gold += 10;
   }
-  
+
+  useSpecial() {
+    if (Math.random() < 0.5) return this.ap - 1;
+    else return this.ap + 2;
+  }
+
+  defend() {
+    return this.dp * 3;
+  }
 }

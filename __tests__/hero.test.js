@@ -61,17 +61,18 @@ describe("Hero", () => {
     expect(newHero.ap).toEqual(2);
     expect(newHero.dp).toEqual(1);
   });
-  
-  // test('should subtract 20 gold from the hero', () => {
-  //   const itemToAdd = new Item("Ring", 1, 0, 0);
-  //   newHero.addItem(itemToAdd);
-  //   expect(newHero.gold).toEqual(6);
-  //   expect(newHero.ap).toEqual(2);
-  //   expect(newHero.dp).toEqual(1);
-  // });
 
   test('should add 10 gold to the hero', () => {
     newHero.getGold();
     expect(newHero.gold).toEqual(20);
-  });  
+  });
+
+  test('should return random attack damage number', () => {
+    expect(newHero.useSpecial()).toBeGreaterThanOrEqual(1);
+    expect(newHero.useSpecial()).toBeLessThanOrEqual(4);
+  });
+
+  test('should triple defense', () => {
+    expect(newHero.defend()).toEqual(3);
+  });
 });

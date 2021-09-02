@@ -61,7 +61,7 @@ function displayOptionsResults(message) {
   $("#reward-options-results-screen").show();
 }
 
-function displayItems(shop) {
+function displayItems(shop, hero) {
   //object -use Object.keys
   //foreach key, "get" the item and access .id, etc concat a string li
 
@@ -72,7 +72,7 @@ function displayItems(shop) {
   const itemsHtml = Object.keys(shop.inv).map(id => `<li id="${id}" class= "list-group-item">${shop.inv[id].name}: ${shop.inv[id].desc}</li>`).join("");
   
   // `<li id="${shop.inv[1].id}" class= "list-group-item">${shop.inv[1].name}: ${shop.inv[1].desc}</li><li id="2" class= "list-group-item">${shop.inv[2].name}: ${shop.inv[2].desc}</li><li id="3" class= "list-group-item">${shop.inv[3].name}: ${shop.inv[3].desc}</li>`;
-  
+  $("#gold-display").text(hero.gold);
   $("#item-shop-display").empty();
   $("#item-shop-display").append(itemsHtml);
 }
@@ -151,6 +151,7 @@ $(document).ready(function () {
       myEnemy.reduceHp(playerDmg);
       if (myEnemy.hp <= 0) {
         myHero.levelUp();
+        myHero.getGold();
         //item/gold reward updates
         displayRewards(myEnemy.name, myHero.level);
       } else {
@@ -184,19 +185,20 @@ $(document).ready(function () {
       }
     } else {
       $("#rewards-screen").hide();
-      displayItems(myShop);
+      displayItems(myShop, myHero);
       $("#shop-screen").show();
     }
   });
   
-  $("#item-shop-display").on("click", "li", () => {
-    // const id = $(this).id;
-    console.log($(this).val())
-    console.log()
-    // const item = myShop.findItem(id);
-    // myHero.addItem(item);
-    // myShop.deleteItem(item);
-    // displayItems(myShop);
-  })
+  $("#item-shop-display").on("click", "li", function(){
+    const id = this.id;
+    const item = myShop.findItem(id);
+    if (myHero.gold >= 20 ) {
+      myHero.addItem(item);
+      myShop.deleteItem(id);
+      displayItems(myShop, myHero);
+    }
+
+  });
   
 });

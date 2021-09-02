@@ -8,6 +8,12 @@ branching to handle the 2 choices -
   -how to handle the ui based on those
   -find a way to keep it clean
 
+
+
+
+
+
+  
 shop/item stuff
 
 one item hero method addItem, items ["name"] display?
