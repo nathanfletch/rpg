@@ -15,8 +15,8 @@ export default class Hero extends Unit {
     this.level++;
   }
 
-  addItem() {
-
+  addItem(item) {
+    this.inv.push(item.name);
   }
   
 }
