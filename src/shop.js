@@ -1,20 +1,29 @@
 export default class Shop {
   constructor() {
-    this.inv = {}
-    this.gold = 20
-    this.currentId = 1
+    this.inv = {};
+    this.gold = 20;
+    this.currentId = 1;
   }
 
-  addItem (item) {
-    item.id = this.currentId
-    this.inv[item.id] = item
-    this.currentId ++
+  addItem(item) {
+    item.id = this.currentId;
+    this.inv[item.id] = item;
+    this.currentId++;
   }
 
-  findItem (id) {
+  findItem(id) {
     if (this.inv[id] !== undefined) {
-      return this.inv[id]
+      return this.inv[id];
     }
-    return false
+    return false;
+  }
+
+  deleteItem(id) {
+    if (this.inv[id] === undefined) {
+      return false;
+    } else {
+      delete this.inv[id];
+      return true;
+    }
   }
 }
