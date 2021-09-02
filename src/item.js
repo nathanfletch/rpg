@@ -5,10 +5,10 @@ export default class Item {
     this.hp = hp;
     this.ap = ap;
     this.dp = dp;
-    // let description = "";
-    // if(hp) description += `This item adds ${hp} to health.`;
-    // if(ap) description += `This item adds ${ap} to attack.`;
-    // if(dp) description += `This item adds ${dp} to defense.`;
+    // let description = "This item adds";
+    // if(hp != 0) description += ` ${hp} to health`;
+    // if(ap != 0) description += ` ${ap} to attack`;
+    // if(dp != 0) description += ` ${dp} to defense`;
     // this.desc = description;
   }
 
