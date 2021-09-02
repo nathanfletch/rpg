@@ -45,5 +45,11 @@ describe("Hero", () => {
     newHero.addItem(itemToAdd);
     expect(newHero.inv[0]).toEqual("Ring");
   })
+
+  // test('should add the item name to the inv propery', () => {
+  //   const itemToAdd = new Item("Ring");
+  //   newHero.addItem(itemToAdd);
+  //   expect(newHero.inv[0]).toEqual("Ring");
+  // })
   
 });
