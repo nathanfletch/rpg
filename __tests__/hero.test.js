@@ -10,6 +10,7 @@
 //     defend
 
 import Hero from "./../src/hero.js";
+import Item from "./../src/item.js";
 
 describe("Hero", () => {
   let newHero;
@@ -26,7 +27,7 @@ describe("Hero", () => {
   test("should correctly create a hero object by calling the parent constructor and ", () => {
     expect(newHero.level).toEqual(1);
     expect(newHero.gold).toEqual(10);
-    expect(newHero.inv).toEqual({});
+    expect(newHero.inv).toEqual([]);
   });
   
   test('should increment the hp, ap, level and dp properties by one', () => {
@@ -37,5 +38,12 @@ describe("Hero", () => {
     expect(newHero.dp).toEqual(2);
   })
 
+  //name
+  //apply effects
+  test('should add the item name to the inv propery', () => {
+    const itemToAdd = new Item("Ring");
+    newHero.addItem(itemToAdd);
+    expect(newHero.inv[0]).toEqual("Ring");
+  })
   
 });

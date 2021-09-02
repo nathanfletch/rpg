@@ -5,7 +5,7 @@ export default class Hero extends Unit {
     super(name, hp, ap, dp);
     this.level = 1;
     this.gold = 10;
-    this.inv = {};
+    this.inv = [];
   }
 
   levelUp() {
@@ -15,5 +15,8 @@ export default class Hero extends Unit {
     this.level++;
   }
 
+  addItem() {
+
+  }
   
 }
