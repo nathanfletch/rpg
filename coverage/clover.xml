@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1630533035427" clover="3.2.0">
-  <project timestamp="1630533035428" name="All files">
-    <metrics statements="21" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="10" elements="31" coveredelements="31" complexity="0" loc="21" ncloc="21" packages="1" files="4" classes="4"/>
+<coverage generated="1630601208333" clover="3.2.0">
+  <project timestamp="1630601208334" name="All files">
+    <metrics statements="31" coveredstatements="31" conditionals="2" coveredconditionals="2" methods="14" coveredmethods="14" elements="47" coveredelements="47" complexity="0" loc="31" ncloc="31" packages="1" files="6" classes="6"/>
     <file name="combat.js" path="C:\Users\natha\Desktop\epicodus\rpg\src\combat.js">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
       <line num="3" count="3" type="stmt"/>
@@ -24,6 +24,22 @@
       <line num="13" count="1" type="stmt"/>
       <line num="14" count="1" type="stmt"/>
       <line num="15" count="1" type="stmt"/>
+    </file>
+    <file name="item.js" path="C:\Users\natha\Desktop\epicodus\rpg\src\item.js">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="4" count="4" type="stmt"/>
+    </file>
+    <file name="shop.js" path="C:\Users\natha\Desktop\epicodus\rpg\src\shop.js">
+      <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <line num="3" count="3" type="stmt"/>
+      <line num="4" count="3" type="stmt"/>
+      <line num="5" count="3" type="stmt"/>
+      <line num="9" count="2" type="stmt"/>
+      <line num="10" count="2" type="stmt"/>
+      <line num="11" count="2" type="stmt"/>
+      <line num="15" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="18" count="1" type="stmt"/>
     </file>
     <file name="unit.js" path="C:\Users\natha\Desktop\epicodus\rpg\src\unit.js">
       <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>

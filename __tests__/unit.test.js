@@ -1,4 +1,18 @@
 /*
+2nd day todos
+adding specials
+branching to handle the 2 choices - 
+  refactor calc functions - pass the array as argument 
+  -how to handle the ui based on those
+  -find a way to keep it clean
+shop/item stuff
+  -only through shop -roll for gold only
+  -effects - +1 ap/dp/hp
+  -apply the effect on equip - hero method addItem
+  -shop - names and effect, show items - click them
+
+
+
 utility fns
 
 Combat 

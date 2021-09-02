@@ -43,9 +43,9 @@ function displayResults(name, playerDmg, enemyDmg) {
   $("#combat-feed").empty();
   $("#combat-feed").append(resultsHtml);
 }
-function displayRewards(monsterName, itemName, level) {
+function displayRewards(monsterName, level) {
   $("#monster-name-span").text(monsterName);
-  const rewardsHtml = `<li class="list-group-item active"><h3>Rewards:</h3></li><li class="list-group-item" >10 gold</li><li class="list-group-item" >Item: ${itemName}</li><li class="list-group-item" >You reached Level ${level}</li>`;
+  const rewardsHtml = `<li class="list-group-item active"><h3>Rewards:</h3></li><li class="list-group-item" >10 gold</li><li class="list-group-item" >You reached Level ${level}</li>`;
 
   $("#rewards-display").empty();
   $("#rewards-display").append(rewardsHtml);
@@ -124,7 +124,7 @@ $(document).ready(function () {
       if (myEnemy.hp <= 0) {
         myHero.levelUp();
         //item/gold reward updates
-        displayRewards(myEnemy.name, "Aardvard Snout", myHero.level);
+        displayRewards(myEnemy.name, myHero.level);
       } else {
         displayStats(myHero, myEnemy);
         // displayOptions()
@@ -148,7 +148,7 @@ $(document).ready(function () {
     } else if (rewardOption === "roll") {
       if (Math.random() >= 0.5) {
         //getItem
-        resultMessage = "won an item!";
+        resultMessage = "won 10 gold";
         displayOptionsResults(resultMessage);
       } else {
         resultMessage = "lost the roll!";
