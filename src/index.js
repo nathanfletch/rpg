@@ -40,7 +40,7 @@ function displayFighting() {
 }
 
 function displayResults(name, playerDmg, enemyDmg) {
-  const resultsHtml = `<li class="list-group-item" >${name} took ${playerDmg} damage!</li><li class="list-group-item">You took ${enemyDmg} damage!</li>`;
+  const resultsHtml = `<li class="list-group-item" >${name} took ${playerDmg >= 0 ? playerDmg : 0} damage!</li><li class="list-group-item">You took ${enemyDmg >= 0 ? enemyDmg : 0} damage!</li>`;
   $("#combat-feed").empty();
   $("#combat-feed").append(resultsHtml);
 }
@@ -61,12 +61,6 @@ function displayOptionsResults(message) {
 }
 
 function displayItems(shop, hero) {
-  //object -use Object.keys
-  //foreach key, "get" the item and access .id, etc concat a string li
-
-  // Object.keys(shop.inv).map(id => `<li id="${id}" class= "list-group-item">${shop.inv[id].name}: ${shop.inv[id].desc}</li>`).join("");
-  //keys doesn't have the items, it has ids
-
   const itemsHtml = Object.keys(shop.inv)
     .map(
       (id) =>
@@ -74,7 +68,6 @@ function displayItems(shop, hero) {
     )
     .join("");
 
-  // `<li id="${shop.inv[1].id}" class= "list-group-item">${shop.inv[1].name}: ${shop.inv[1].desc}</li><li id="2" class= "list-group-item">${shop.inv[2].name}: ${shop.inv[2].desc}</li><li id="3" class= "list-group-item">${shop.inv[3].name}: ${shop.inv[3].desc}</li>`;
   $("#gold-display").text(hero.gold);
   $("#item-shop-display").empty();
   $("#item-shop-display").append(itemsHtml);
@@ -91,19 +84,23 @@ $(document).ready(function () {
     const name = $("#name-input").val().trim();
     const heroType = $("input:radio[name=heroType]:checked").val();
     if (heroType === "Warrior") {
-      myHero = new Hero(name, 10, 3, 2);
+      myHero = new Hero(name, 15, 3, 2);
+      $("#Mage").hide();
+      $("#Warrior").show();
     } else {
       myHero = new Hero(name, 10, 4, 1);
+      $("#Warrior").hide();
+      $("#Mage").show();
     }
     myShop = new Shop();
-    let glassSword = new Item("Glass Sword", 0, 3, -2);
+    let glassSword = new Item("Glass Sword", 0, 6, -1);
     let healthVial = new Item("Health Vial", 10, 0, 1);
     let aardFang = new Item("Aardvark Fang", -5, 4, 1);
     myShop.addItem(glassSword);
     myShop.addItem(healthVial);
     myShop.addItem(aardFang);
     //start combat
-    myEnemy = new Unit("Aardvark", 2, 3, 1);
+    myEnemy = new Unit("Baby Aardvark", 12, 4, 1);
     displayStats(myHero, myEnemy);
     displayIntent(myEnemy);
     $("#opening-screen").hide();
@@ -111,10 +108,11 @@ $(document).ready(function () {
   });
 
   $(".combat-start-btn").click(() => {
-    myEnemy = new Unit("Aardvark Avenger", 10, 4, 2);
+    myEnemy = new Unit(`Aardvark Avenger ${myHero.level === 1 ? "" : myHero.level - 1}`, (15 + myHero.level* 2), (1 + myHero.level * 2), (1 + myHero.level));
     displayStats(myHero, myEnemy);
     displayIntent(myEnemy);
     $("#combat-feed").empty();
+    $("#shop-screen").hide();
     $("#reward-options-results-screen").hide();
     $("#combat-screen").show();
   });
@@ -155,14 +153,22 @@ $(document).ready(function () {
         enemyDmg = myEnemy.attack() - myHero.dp;
       }
 
-      if (enemyDmg > 0) myHero.reduceHp(enemyDmg);
       if (playerDmg > 0) myEnemy.reduceHp(playerDmg);
+      
       if (myEnemy.hp <= 0) {
         myHero.levelUp();
         myHero.getGold();
         //item/gold reward updates
         displayRewards(myEnemy.name, myHero.level);
       } else {
+        if (enemyDmg > 0) myHero.reduceHp(enemyDmg);
+        //are you dead?
+        if(myHero.hp <= 0) {
+          $("#combat-screen").hide();
+          console.log(myHero.level)
+          $("#death-counter").after(`<h2>You have been slain by ${myHero.level === 1 ? 'Baby' : 'Avenger'} Aardvark ${myHero.level  === 1 ? "": myHero.level -1}.</h2>`)
+          $("#death-screen").show();
+        }
         displayStats(myHero, myEnemy);
         // displayOptions()
         displayResults(myEnemy.name, playerDmg, enemyDmg);
@@ -179,8 +185,8 @@ $(document).ready(function () {
 
     let resultMessage = "";
     if (rewardOption === "heal") {
-      myHero.reduceHp(-4);
-      resultMessage = "healed 4 health";
+      myHero.reduceHp(-6);
+      resultMessage = "healed 6 health";
       displayOptionsResults(resultMessage);
     } else if (rewardOption === "roll") {
       if (Math.random() >= 0.5) {

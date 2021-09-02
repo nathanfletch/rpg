@@ -5,3 +5,7 @@ li {
 .hidden {
   display: none;
 }
+
+pre {
+  overflow: hidden;
+}

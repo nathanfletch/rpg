@@ -31,22 +31,32 @@
         <div id="enemy-stats-display" class="col-6"></div>
       </div>
       <div class="row p-3">
-        <pre class="col-4">
+        <pre id="Mage" class="hidden col-4">
+               __/\__
+          . _  \\''//
+          -( )-/_||_\
+           .'. \_()_/
+            |   | . \
+            |   | .  \
+           .'. ,\_____'.
+        </pre>
+        <pre id="Warrior" class="col-4">
              /\_[]_/\
              |] _||_ [|
-       ___     \/ || \/
+      ___     \/ || \/
   /___\       ||
  (|0 0|)      ||
 __/{\U/}\_ ___/vvv
 / \  {~}   / _|_P|
 | /\  ~   /_/   []
+
           </pre
         >
         <div class="col-4">
           <ul class="list-group" id="combat-feed"></ul>
         </div>
         <pre class="col-4">
-       _.---._    /\\
+           _.---._    /\\
         ./'       "--`\//
       ./              o \
      /./\  )______   \__ \
@@ -65,6 +75,7 @@ __/{\U/}\_ ___/vvv
               name="combat-options"
               id="attack-option"
               value="attack"
+              checked="true"
             />
             <label class="mx-1"> Fireball </label>
             <input
@@ -79,6 +90,7 @@ __/{\U/}\_ ___/vvv
               name="combat-options"
               id="defend-option"
               value="defend"
+              checked="true"
             />
           </div>
           <div class="col-6 text-center">
@@ -114,7 +126,7 @@ __/{\U/}\_ ___/vvv
               value="roll"
               checked="true"
             />
-            <span>Roll for item</span>
+            <span>Roll for extra gold!</span>
           </label>
         </div>
         <button class="btn btn-success">Choose</button>
@@ -142,6 +154,10 @@ __/{\U/}\_ ___/vvv
       </ul> -->
       <h2>Another Aardvark punches you in the face! Do something about it?</h2>
       <div class="combat-start-btn btn btn-danger">Punch It</div>
+    </div>
+    <div id="death-screen" class="p-5 text-center container hidden">
+      <h1 id="death-counter">You died.</h1>
+      <h3>Refresh to player again you filthy casual.</h3>
     </div>
   </body>
 </html>
