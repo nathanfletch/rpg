@@ -20,6 +20,11 @@ export default class Hero extends Unit {
     this.hp += item.hp;
     this.ap += item.ap;
     this.dp += item.dp;
+    this.gold -= 20;
+  }
+  //
+  getGold() {
+    this.gold +=10;
   }
   
 }

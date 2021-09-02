@@ -39,5 +39,6 @@ describe("Shop", () => {
   test('should be able to delete item in shop inv', () => {
     newShop.addItem(newItem);
     expect(newShop.deleteItem(1)).toEqual(true);
+    expect(newShop.deleteItem(3)).toEqual(false);
   });
 });

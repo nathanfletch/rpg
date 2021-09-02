@@ -5,6 +5,8 @@ import "./css/styles.css";
 import Unit from "./../src/unit.js";
 import Hero from "./../src/hero.js";
 import Combat from "./../src/combat.js";
+import Item from "./../src/item.js";
+import Shop from "./../src/shop.js";
 
 function displayStats(hero, enemy) {
   //make html
@@ -59,11 +61,30 @@ function displayOptionsResults(message) {
   $("#reward-options-results-screen").show();
 }
 
+function displayItems(shop) {
+  //object -use Object.keys
+  //foreach key, "get" the item and access .id, etc concat a string li
+
+  // Object.keys(shop.inv).map(id => `<li id="${id}" class= "list-group-item">${shop.inv[id].name}: ${shop.inv[id].desc}</li>`).join("");
+  //keys doesn't have the items, it has ids
+  
+
+  const itemsHtml = Object.keys(shop.inv).map(id => `<li id="${id}" class= "list-group-item">${shop.inv[id].name}: ${shop.inv[id].desc}</li>`).join("");
+  
+  // `<li id="${shop.inv[1].id}" class= "list-group-item">${shop.inv[1].name}: ${shop.inv[1].desc}</li><li id="2" class= "list-group-item">${shop.inv[2].name}: ${shop.inv[2].desc}</li><li id="3" class= "list-group-item">${shop.inv[3].name}: ${shop.inv[3].desc}</li>`;
+  
+  $("#item-shop-display").empty();
+  $("#item-shop-display").append(itemsHtml);
+}
+
+
+
 $(document).ready(function () {
   //globals
   let myHero;
   let myEnemy;
   let myCombat;
+  let myShop;
 
   $("#start-form").submit((e) => {
     e.preventDefault();
@@ -74,8 +95,15 @@ $(document).ready(function () {
     } else {
       myHero = new Hero(name, 10, 4, 1);
     }
+    myShop = new Shop();
+    let glassSword = new Item("Glass Sword", 0, 3, -2);
+    let healthVial = new Item("Health Vial", 10, 0, 1);
+    let aardFang = new Item("Aardvark Fang", -5, 4, 1);
+    myShop.addItem(glassSword); 
+    myShop.addItem(healthVial); 
+    myShop.addItem(aardFang); 
     //start combat
-    myEnemy = new Unit("Aardvark", 7, 3, 1);
+    myEnemy = new Unit("Aardvark", 2, 3, 1);
     myCombat = new Combat(myHero, myEnemy);
     displayStats(myHero, myEnemy);
     displayIntent(myEnemy);
@@ -156,7 +184,19 @@ $(document).ready(function () {
       }
     } else {
       $("#rewards-screen").hide();
+      displayItems(myShop);
       $("#shop-screen").show();
     }
   });
+  
+  $("#item-shop-display").on("click", "li", () => {
+    // const id = $(this).id;
+    console.log($(this).val())
+    console.log()
+    // const item = myShop.findItem(id);
+    // myHero.addItem(item);
+    // myShop.deleteItem(item);
+    // displayItems(myShop);
+  })
+  
 });
