@@ -13,6 +13,6 @@ describe("Item", () => {
   
   test("should add a desc property that describes the item function", () => {
     let newItem = new Item("sword", 0, 1, 1);
-    expect(newItem.desc).toEqual("This item adds 1 to attack 1 to defense ");
+    expect(newItem.desc).toEqual("This item adds 1 to attack 1 to defense");
   });
 });
