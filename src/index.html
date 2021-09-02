@@ -4,16 +4,48 @@
     <title>Hi</title>
   </head>
   <body>
-    <div class="container">
+    <div id="opening-screen" class="container text-center">
+      <form class="p-5" id="start-form" action="submit">
+        <label  for="name-input"><h1>Enter name:</h1></label>
+        <input  type="text" id="name-input" class= "form-control" />
+        <h3 class="p-3">Choose your hero:</h3>
+        <div class="radio form-check">
+          <label>
+            <input type="radio" name="heroType" value="Warrior" />
+            <span>Warrior</span>
+          </label>
+        </div>
+        <div class="radio form-check">
+          <label>
+            <input type="radio" name="heroType" value="Mage" checked="true" />
+            <span>Mage</span>
+          </label>
+        </div>
+        <button class="btn btn-block btn-success">Start Game</button>
+      </form>
+    </div>
+
+    <div id="combat-screen" class="hidden container text-center">
       <div class="row">
         <div id="hero-stats-display" class="col-6"></div>
         <div id="enemy-stats-display" class="col-6"></div>
       </div>
       <div class="row">
-        <div class="col-6">
-          <ul id="combat-feed"></ul>
+        <pre class="col-4">
+             /\_[]_/\
+             |] _||_ [|
+       ___     \/ || \/
+  /___\       ||
+ (|0 0|)      ||
+__/{\U/}\_ ___/vvv
+/ \  {~}   / _|_P|
+| /\  ~   /_/   []
+          </pre
+        >
+        <div class="col-4">
+          <ul class="list-group" id="combat-feed"></ul>
         </div>
-        <pre class="col-6">
+        <pre class="col-4">
        _.---._    /\\
         ./'       "--`\//
       ./              o \
@@ -23,44 +55,90 @@
         "     "    "  "      </pre
         >
       </div>
-      <div >
+      <div>
         <form class="row" id="options-form">
-          <div class="col-8 text-center">
-            <h4>Choose 2: </h4>
-            <label class="mx-1">
-              Attack
-            </label>
-            <input type="checkbox" name="combat-options" id="attack-option" value ="attack"> 
-            <label class="mx-1">
-              Fireball
-            </label>
-            <input type="checkbox" name="combat-options" id="special-option" value="special"> 
-            <label class="mx-1">
-              Defend
-            </label>
-            <input type="checkbox" name="combat-options" id="defend-option" value="defend"> 
+          <div class="col-6 text-center">
+            <h4>Choose 2:</h4>
+            <label class="mx-1"> Attack </label>
+            <input
+              type="checkbox"
+              name="combat-options"
+              id="attack-option"
+              value="attack"
+            />
+            <label class="mx-1"> Fireball </label>
+            <input
+              type="checkbox"
+              name="combat-options"
+              id="special-option"
+              value="special"
+            />
+            <label class="mx-1"> Defend </label>
+            <input
+              type="checkbox"
+              name="combat-options"
+              id="defend-option"
+              value="defend"
+            />
           </div>
-          <div class="col-4 text-center">
-            <button id="fight-btn" class="btn btn-danger">Fight!</button>
+          <div class="col-6 text-center">
+            <button id="fight-btn" class="m-3 btn btn-danger">Fight!</button>
           </div>
         </form>
       </div>
+    </div>
 
-      <!-- <form id="form1">
-        <div class="form-group">
-          <label for="input1">Enter a word:</label>
-          <input id="input1 form-control" type="text">
+    <div class="container text-center hidden" id="rewards-screen">
+      <h1 class="p-5">You defeated <span id="monster-name-span"></span>!</h1>
+      <ul class="p-5 list-group" id="rewards-display"></ul>
+
+      <form class="p-5" id="rewards-options-form">
+        <h3>Choose 1:</h3>
+        <div class="radio form-check">
+          <label>
+            <input type="radio" name="reward-options" value="heal" />
+            <span>Heal</span>
+          </label>
         </div>
-        <div class="form-group">
-          <label for="input2"">Enter a word:</label>
-          <input id="input2 form-control" type="text">
+        <div class="radio form-check">
+          <label>
+            <input type="radio" name="reward-options" value="shop" />
+            <span>Shop</span>
+          </label>
         </div>
-        <div class="form-group">
-          <label for="input3">Enter a number:</label>
-          <input id="input3 form-control" type="number">
+        <div class="radio form-check">
+          <label>
+            <input
+              type="radio"
+              name="reward-options"
+              value="roll"
+              checked="true"
+            />
+            <span>Roll for item</span>
+          </label>
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
-      </form> -->
+        <button class="btn btn-success">Choose</button>
+      </form>
+    </div>
+
+    <div id="shop-screen" class="container hidden">
+      <h1 class="p-5">Buy or Get Out!</h1>
+      <ul class="p-3 list-group" id="item-shop-display"></ul>
+        <div id="buy" class="mx-3 col btn btn-success">Buy</div>
+        <div id="get-out" class="mx-3 col btn btn-danger">Get Out</div>
+    </div>
+
+    <div
+      class="container text-center hidden"
+      id="reward-options-results-screen"
+    >
+      <h1 class="p-5">You <span id="result-message-span"></span>!</h1>
+      <!-- <ul class="p-5 list-group" id="rewards-display">
+        
+
+      </ul> -->
+      <h2>Another Aardvark punches you in the face! Do something about it?</h2>
+      <div id="combat-start-btn" class="btn btn-danger">Punch It</div>
     </div>
   </body>
 </html>

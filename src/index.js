@@ -29,7 +29,7 @@ function displayStats(hero, enemy) {
 }
 
 function displayIntent(enemy) {
-  const intentHtml = `<li>${enemy.name} will attack for ${enemy.ap}</li>`;
+  const intentHtml = `<li class="list-group-item">${enemy.name} will attack for ${enemy.ap}</li>`;
   $("#combat-feed").append(intentHtml);
 }
 
@@ -39,25 +39,58 @@ function displayFighting() {
 }
 
 function displayResults(name, playerDmg, enemyDmg) {
-  const resultsHtml = `<li>${name} took ${playerDmg} points of damage!</li><li>You took ${enemyDmg} points of damage!</li>`;
+  const resultsHtml = `<li class="list-group-item" >${name} took ${playerDmg} damage!</li><li class="list-group-item">You took ${enemyDmg} damage!</li>`;
   $("#combat-feed").empty();
   $("#combat-feed").append(resultsHtml);
 }
-function displayOptions(hero) {
-  const optionsHtml = ``;
+function displayRewards(monsterName, itemName, level) {
+  $("#monster-name-span").text(monsterName);
+  const rewardsHtml = `<li class="list-group-item active"><h3>Rewards:</h3></li><li class="list-group-item" >10 gold</li><li class="list-group-item" >Item: ${itemName}</li><li class="list-group-item" >You reached Level ${level}</li>`;
+
+  $("#rewards-display").empty();
+  $("#rewards-display").append(rewardsHtml);
+  $("#combat-screen").hide();
+  $("#rewards-screen").show();
+}
+
+function displayOptionsResults(message) {
+  $("#result-message-span").text(message);
+  $("#rewards-screen").hide();
+  $("#reward-options-results-screen").show();
 }
 
 $(document).ready(function () {
   //globals
-  let myHero = new Hero("ASCCI BOI", 10, 3, 1);
+  let myHero;
+  let myEnemy;
+  let myCombat;
 
-  //start combat
-  let myEnemy = new Unit("Aardvark", 5, 2, 1);
-  let combat1 = new Combat(myHero, myEnemy);
-  // displayEnemy() - only 1 enemy now
-  displayStats(myHero, myEnemy);
-  displayIntent(myEnemy);
-  // displayOptions() - no options yet
+  $("#start-form").submit((e) => {
+    e.preventDefault();
+    const name = $("#name-input").val().trim();
+    const heroType = $("input:radio[name=heroType]:checked").val();
+    if (heroType === "Warrior") {
+      myHero = new Hero(name, 10, 3, 2);
+    } else {
+      myHero = new Hero(name, 10, 4, 1);
+    }
+    //start combat
+    myEnemy = new Unit("Aardvark", 7, 3, 1);
+    myCombat = new Combat(myHero, myEnemy);
+    displayStats(myHero, myEnemy);
+    displayIntent(myEnemy);
+    $("#opening-screen").hide();
+    $("#combat-screen").show();
+  });
+
+  $("#combat-start-btn").click(() => {
+    myEnemy = new Unit("AardvarkBro", 10, 4, 2);
+    myCombat = new Combat(myHero, myEnemy);
+    displayStats(myHero, myEnemy);
+    displayIntent(myEnemy);
+    $("#reward-options-results-screen").hide();
+    $("#combat-screen").show();
+  });
 
   $("input:checkbox").on("change", function () {
     if ($(this).siblings(":checked").length > 1) {
@@ -73,38 +106,57 @@ $(document).ready(function () {
     $("input:checkbox:checked").each(function () {
       if (this.checked) fightArray.push($(this).val());
     });
-    console.log(fightArray);
+    if (fightArray.includes("attack")) {
+      //call calc fns with attack
+      //refactor?
+    }
 
     displayFighting();
     setTimeout(() => {
       // calcPlayerDamage = hero attack() - unit armor  DAMAGE TO THE ENEMY
       // calcEnemyDamge = unit attack() - player armor DAMAGE TO THE PLAYER
-      const playerDmg = combat1.calcPlayerDamage();
-      const enemyDmg = combat1.calcEnemyDamage();
+      const playerDmg = myCombat.calcPlayerDamage();
+      const enemyDmg = myCombat.calcEnemyDamage();
       // unit.reduceHp(calcPlayerDamage)
       // hero.reducehp(calcEnemyDamage());
       myHero.reduceHp(enemyDmg);
       myEnemy.reduceHp(playerDmg);
-      // if (myEnemy.hp <= 0) {
-      //   //hide the combat screen
-      //   //display rewards screen
-      //   //levelUp function
-      //   //item/gold reward updates
-      // } else
-      displayStats(myHero, myEnemy);
-      // displayOptions()
-      displayResults(myEnemy.name, playerDmg, enemyDmg);
-      displayIntent(myEnemy);
+      if (myEnemy.hp <= 0) {
+        myHero.levelUp();
+        //item/gold reward updates
+        displayRewards(myEnemy.name, "Aardvard Snout", myHero.level);
+      } else {
+        displayStats(myHero, myEnemy);
+        // displayOptions()
+        displayResults(myEnemy.name, playerDmg, enemyDmg);
+        displayIntent(myEnemy);
+      }
     }, 1000);
 
     //next: displayOptions death
   });
 
-  $("#form1").submit(function (event) {
-    event.preventDefault();
-    // const input1 = $('#input1').val();
-    // const input2 = $('#input2').val();
-    // const input3 = $('#input3').val();
-    // $('#display').append("<p>" + input1 + input2 + input3 + "</p>");
+  $("#rewards-options-form").submit((e) => {
+    e.preventDefault();
+    const rewardOption = $("input:radio[name=reward-options]:checked").val();
+
+    let resultMessage = "";
+    if (rewardOption === "heal") {
+      myHero.reduceHp(-4);
+      resultMessage = "healed 4 health";
+      displayOptionsResults(resultMessage);
+    } else if (rewardOption === "roll") {
+      if (Math.random() >= 0.5) {
+        //getItem
+        resultMessage = "won an item!";
+        displayOptionsResults(resultMessage);
+      } else {
+        resultMessage = "lost the roll!";
+        displayOptionsResults(resultMessage);
+      }
+    } else {
+      $("#rewards-screen").hide();
+      $("#shop-screen").show();
+    }
   });
 });
