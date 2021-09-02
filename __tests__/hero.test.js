@@ -36,7 +36,7 @@ describe("Hero", () => {
     expect(newHero.hp).toEqual(6);
     expect(newHero.ap).toEqual(3);
     expect(newHero.dp).toEqual(2);
-  })
+  });
 
   //name
   //apply effects
@@ -44,12 +44,24 @@ describe("Hero", () => {
     const itemToAdd = new Item("Ring");
     newHero.addItem(itemToAdd);
     expect(newHero.inv[0]).toEqual("Ring");
-  })
+  });
 
-  // test('should add the item name to the inv propery', () => {
-  //   const itemToAdd = new Item("Ring");
-  //   newHero.addItem(itemToAdd);
-  //   expect(newHero.inv[0]).toEqual("Ring");
-  // })
+  test('should add the item hp, ap, and dp values to the hero properties', () => {
+    const itemToAdd = new Item("Ring", 0, 1, 1);
+    newHero.addItem(itemToAdd);
+    expect(newHero.hp).toEqual(5);
+    expect(newHero.ap).toEqual(3);
+    expect(newHero.dp).toEqual(2);
+  });
+
+  test('should add the item hp, ap, and dp values to the hero properties', () => {
+    const itemToAdd = new Item("Ring", 1, 0, 0);
+    newHero.addItem(itemToAdd);
+    expect(newHero.hp).toEqual(6);
+    expect(newHero.ap).toEqual(2);
+    expect(newHero.dp).toEqual(1);
+  });
+
+  // sell item also needs to remove effect
   
 });

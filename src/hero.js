@@ -17,6 +17,9 @@ export default class Hero extends Unit {
 
   addItem(item) {
     this.inv.push(item.name);
+    this.hp += item.hp;
+    this.ap += item.ap;
+    this.dp += item.dp;
   }
   
 }
