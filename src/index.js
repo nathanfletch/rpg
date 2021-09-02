@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/styles.css";
 import Unit from "./../src/unit.js";
 import Hero from "./../src/hero.js";
-import Combat from "./../src/combat.js";
 import Item from "./../src/item.js";
 import Shop from "./../src/shop.js";
 
@@ -67,23 +66,24 @@ function displayItems(shop, hero) {
 
   // Object.keys(shop.inv).map(id => `<li id="${id}" class= "list-group-item">${shop.inv[id].name}: ${shop.inv[id].desc}</li>`).join("");
   //keys doesn't have the items, it has ids
-  
 
-  const itemsHtml = Object.keys(shop.inv).map(id => `<li id="${id}" class= "list-group-item">${shop.inv[id].name}: ${shop.inv[id].desc}</li>`).join("");
-  
+  const itemsHtml = Object.keys(shop.inv)
+    .map(
+      (id) =>
+        `<li id="${id}" class= "list-group-item">${shop.inv[id].name}: ${shop.inv[id].desc}</li>`
+    )
+    .join("");
+
   // `<li id="${shop.inv[1].id}" class= "list-group-item">${shop.inv[1].name}: ${shop.inv[1].desc}</li><li id="2" class= "list-group-item">${shop.inv[2].name}: ${shop.inv[2].desc}</li><li id="3" class= "list-group-item">${shop.inv[3].name}: ${shop.inv[3].desc}</li>`;
   $("#gold-display").text(hero.gold);
   $("#item-shop-display").empty();
   $("#item-shop-display").append(itemsHtml);
 }
 
-
-
 $(document).ready(function () {
   //globals
   let myHero;
   let myEnemy;
-  let myCombat;
   let myShop;
 
   $("#start-form").submit((e) => {
@@ -99,23 +99,22 @@ $(document).ready(function () {
     let glassSword = new Item("Glass Sword", 0, 3, -2);
     let healthVial = new Item("Health Vial", 10, 0, 1);
     let aardFang = new Item("Aardvark Fang", -5, 4, 1);
-    myShop.addItem(glassSword); 
-    myShop.addItem(healthVial); 
-    myShop.addItem(aardFang); 
+    myShop.addItem(glassSword);
+    myShop.addItem(healthVial);
+    myShop.addItem(aardFang);
     //start combat
     myEnemy = new Unit("Aardvark", 2, 3, 1);
-    myCombat = new Combat(myHero, myEnemy);
     displayStats(myHero, myEnemy);
     displayIntent(myEnemy);
     $("#opening-screen").hide();
     $("#combat-screen").show();
   });
 
-  $("#combat-start-btn").click(() => {
-    myEnemy = new Unit("AardvarkBro", 10, 4, 2);
-    myCombat = new Combat(myHero, myEnemy);
+  $(".combat-start-btn").click(() => {
+    myEnemy = new Unit("Aardvark Avenger", 10, 4, 2);
     displayStats(myHero, myEnemy);
     displayIntent(myEnemy);
+    $("#combat-feed").empty();
     $("#reward-options-results-screen").hide();
     $("#combat-screen").show();
   });
@@ -128,27 +127,36 @@ $(document).ready(function () {
 
   $("#options-form").submit((e) => {
     e.preventDefault();
-    //get our checked options
-    //branch to call the options
+
     let fightArray = [];
     $("input:checkbox:checked").each(function () {
       if (this.checked) fightArray.push($(this).val());
     });
-    if (fightArray.includes("attack")) {
-      //call calc fns with attack
-      //refactor?
-    }
 
     displayFighting();
     setTimeout(() => {
-      // calcPlayerDamage = hero attack() - unit armor  DAMAGE TO THE ENEMY
-      // calcEnemyDamge = unit attack() - player armor DAMAGE TO THE PLAYER
-      const playerDmg = myCombat.calcPlayerDamage();
-      const enemyDmg = myCombat.calcEnemyDamage();
-      // unit.reduceHp(calcPlayerDamage)
-      // hero.reducehp(calcEnemyDamage());
-      myHero.reduceHp(enemyDmg);
-      myEnemy.reduceHp(playerDmg);
+      let playerDmg;
+      if (fightArray.includes("attack")) {
+        if (fightArray.includes("special")) {
+          playerDmg = myHero.useSpecial() + myHero.attack() - myEnemy.dp;
+          // attack and special
+        } else {
+          playerDmg = myHero.attack() - myEnemy.dp;
+          // attack defend
+        }
+      } else {
+        playerDmg = myHero.useSpecial() - myEnemy.dp;
+      }
+
+      let enemyDmg;
+      if (fightArray.includes("defend")) {
+        enemyDmg = myEnemy.attack() - myHero.defend();
+      } else {
+        enemyDmg = myEnemy.attack() - myHero.dp;
+      }
+
+      if (enemyDmg > 0) myHero.reduceHp(enemyDmg);
+      if (playerDmg > 0) myEnemy.reduceHp(playerDmg);
       if (myEnemy.hp <= 0) {
         myHero.levelUp();
         myHero.getGold();
@@ -177,7 +185,9 @@ $(document).ready(function () {
     } else if (rewardOption === "roll") {
       if (Math.random() >= 0.5) {
         //getItem
-        resultMessage = "won 10 gold";
+        resultMessage = "won 20 gold";
+        myHero.getGold();
+        myHero.getGold();
         displayOptionsResults(resultMessage);
       } else {
         resultMessage = "lost the roll!";
@@ -189,16 +199,14 @@ $(document).ready(function () {
       $("#shop-screen").show();
     }
   });
-  
-  $("#item-shop-display").on("click", "li", function(){
+
+  $("#item-shop-display").on("click", "li", function () {
     const id = this.id;
     const item = myShop.findItem(id);
-    if (myHero.gold >= 20 ) {
+    if (myHero.gold >= 20) {
       myHero.addItem(item);
       myShop.deleteItem(id);
       displayItems(myShop, myHero);
     }
-
   });
-  
 });
