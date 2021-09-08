@@ -6,6 +6,29 @@ import Unit from "./../src/unit.js";
 import Hero from "./../src/hero.js";
 import Item from "./../src/item.js";
 import Shop from "./../src/shop.js";
+import anime from "animejs/lib/anime.es"
+
+let warAni = anime({
+  targets: '#Warrior',
+  translateX: 300,
+  direction:'alternate',
+  easing: 'easeInElastic',
+  duration:600,
+})
+let mageAni = anime({
+  targets: '#Mage',
+  translateX: 300,
+  direction:'alternate',
+  easing: 'easeInElastic',
+  duration:600,
+})
+let enemyAni = anime({
+  targets: '#aardvark',
+  translateX: -300,
+  direction:'alternate',
+  easing: 'easeInElastic',
+  duration:600,
+})
 
 function displayStats(hero, enemy) {
   //make html
@@ -37,6 +60,9 @@ function displayIntent(enemy) {
 function displayFighting() {
   $("#combat-feed").empty();
   $("#combat-feed").append(`<li><h3>...fighting...</h3></li>`);
+  warAni.play();
+  mageAni.play();
+  enemyAni.play();
 }
 
 function displayResults(name, playerDmg, enemyDmg) {
