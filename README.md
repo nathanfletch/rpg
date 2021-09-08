@@ -24,6 +24,7 @@ There are no known bugs at this time.
 ## Contact
 
 The best way to reach me is by [email](mailto:nathan.fletcher@gmail.com).
+charlestweber@gmail.com
 
 ## License
 
